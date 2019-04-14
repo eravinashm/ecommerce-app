@@ -1,0 +1,12 @@
+.ecommerce-app-items{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.ecommerce-app-items li{
+    margin: 10px;
+}
+.ecommerce-app-image{
+    width: 200px;
+    height: 200px;
+}
