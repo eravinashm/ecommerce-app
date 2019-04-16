@@ -17,8 +17,8 @@ const styles = theme => ({
       flexGrow: 1,
     },
     paper: {
-      height: 140,
-      width: 100,
+      height: 240,
+      width: 300,
     },
     control: {
       padding: theme.spacing.unit * 2,
@@ -29,55 +29,86 @@ class Items extends Component{
     state = {
         spacing: '16',
         products: null,
-        hasError: false
+        hasError: false,
+        filtersArray: [],
+        responseData: null
     };
     handleChange = key => (event, value) => {
         this.setState({
           [key]: value,
         });
     };    
-    componentDidMount(){
-        this.fetchResponseData();
+  async componentDidMount(){
+    await this.fetchResponseData();
+    this.cellRenderer(this.state.filtersArray);
+  }
+  /*
+  static getDerivedStateFromProps(nextProps, prevState){
+    if(nextProps.filtersArray !== prevState.filtersArray){
+      return{ filtersArray: nextProps.filtersArray};
     }
-    fetchResponseData = async() => {
-        let responseData = await ProductService();
-        // debugger;
-        if(responseData !== null){
-            console.log(responseData);
-            this.setState({products: responseData});
-            /*this.setState(prevState => ({
-                products: {
-                    ...prevState.products,
-                    responseData
-                }
-            }))
-            */
-        }
+  }
+  */
+  componentWillReceiveProps(nextProps){
+    if(nextProps.filtersArray !== this.state.filtersArray){
+      this.cellRenderer(nextProps.filtersArray);
+      this.setState({filtersArray: nextProps.filtersArray});
     }
-    render(){
-        let products = this.state.products;
-        const { classes } = this.props;
-        const { spacing } = this.state;
-        if(products === null){
-            return <div>No data</div>;
+  }
+  fetchResponseData = async() => {
+      let responseData = await ProductService();
+      if(responseData !== null){
+        debugger;
+        this.setState({responseData: responseData});
+      }
+  }
+  cellRenderer = (filtersArray) => {
+    if(filtersArray !== undefined && filtersArray.length > 0){
+      console.log('inside cellRenderer() if');
+      let tempArray = [];
+      this.state.responseData.map((product, index) => {
+        for(let id of filtersArray){
+          if(product.brand_id === id)
+            tempArray.push(product);
         }
-        return (
-          <Grid container className={classes.root} spacing={16}>
-            <Grid item xs={12}>
-              <Grid container className={classes.demo} spacing={Number(spacing)}>
-                {
-                products.map((product, index) => (
-                  <Grid key={index} item>
-                    <Paper className={classes.paper} >
-                        <img src={product.img} alt={product.name} />
-                        {product.name}
-                    </Paper>
-                  </Grid>
-                ))}
-              </Grid>
+      })
+      if(tempArray.length > 0)
+        this.setState({products: tempArray});
+    }else{
+      console.log('inside cellRenderer() else');
+      debugger;
+      this.setState({products: this.state.responseData});
+    }
+  }
+  render(){
+      let products = this.state.products;
+      const { classes } = this.props;
+      const { spacing } = this.state;
+      if(products === null){
+          return <div>No data</div>;
+      }
+      return (
+        <Grid container className={classes.root} spacing={16}>
+          <Grid item xs={12}>
+            <Grid container className={classes.demo} spacing={Number(spacing)}>
+              {
+              products.map((product, index) => (
+                <Grid key={index} item>
+                  <Paper className={classes.paper} >
+                      <ul>
+                        <li>                        
+                          <img src={product.img} alt={product.name} className="ecommerce-app-image" />
+                        </li>
+                        <li>{product.name}</li>
+                        <li>{product.brand_id}</li>
+                      </ul>  
+                  </Paper>
+                </Grid>
+              ))}
             </Grid>
           </Grid>
-        );    
+        </Grid>
+      );    
    }
 }
 

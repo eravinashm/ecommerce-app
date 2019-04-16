@@ -13,22 +13,33 @@ const styles = theme => ({
     },
     paper: {
       padding: theme.spacing.unit * 2,
+      height: 500,
       textAlign: 'center',
       color: theme.palette.text.secondary,
     },
 });
 
 class ProductsPage extends Component{
+    state = {
+        filtersArray: []
+    }
+    callbackFiltersArray = (filtersArray) => {
+        this.setState({filtersArray: filtersArray});
+    }
     render(){
         const {classes} = this.props;
         return(
             <div className={classes.root}>
                 <Grid container spacing={24}>
                     <Grid item xs={3}>
-                    <Paper className={classes.paper}><Filters /></Paper>
+                        <Paper className={classes.paper}>
+                            <Filters callbackFiltersArray={this.callbackFiltersArray}/>
+                        </Paper>
                     </Grid>
                     <Grid item xs={9}>
-                    <Paper className={classes.paper}><Items /></Paper>
+                        <Paper className={classes.paper}>
+                            <Items filtersArray={this.state.filtersArray}/>
+                        </Paper>
                     </Grid>
                 </Grid>
             </div>
