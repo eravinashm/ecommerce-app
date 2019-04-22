@@ -18,11 +18,21 @@ class Filters extends Component{
             //console.log(data)
         }
     } 
-    clickHandler = (brandId) => {
-        if(!this.state.filtersArray.includes(brandId)){
-            let updatedArray = [...this.state.filtersArray, brandId];
-            this.props.callbackFiltersArray(updatedArray);
-            this.setState({filtersArray: updatedArray});
+    changeHandler = (event, brandId) => {
+        console.log(event.target.checked)
+        if(event.target.checked){
+            if(!this.state.filtersArray.includes(brandId)){
+                let updatedArray = [...this.state.filtersArray, brandId];
+                this.props.callbackFiltersArray(updatedArray);
+                this.setState({filtersArray: updatedArray});
+            }
+        }else{
+                let filtersArray = [...this.state.filtersArray];
+                let updatedArray = filtersArray.filter(function(value, index, arr){
+                    return value !== brandId
+                });
+                this.props.callbackFiltersArray(updatedArray);
+                this.setState({filtersArray: updatedArray});
         }
     }
     render(){
@@ -39,7 +49,8 @@ class Filters extends Component{
                         return(
                         <li key={index}>
                             ({brand.id})
-                            <input type='checkbox' onClick={() => this.clickHandler(brand.id)}/>
+                            <input type='checkbox' 
+                                onClick={(event) => this.changeHandler(event, brand.id)} />
                             {brand.name}
                         </li>)
                     }) 

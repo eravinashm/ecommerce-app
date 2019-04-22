@@ -7,6 +7,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import Paper from '@material-ui/core/Paper';
+import {Link, NavLink} from 'react-router-dom';
 
 import ProductService from '../../../services/Products/Products';
 import MediaCard from '../../../components/MediaCard/MediaCard';
@@ -58,7 +59,7 @@ class Items extends Component{
   fetchResponseData = async() => {
       let responseData = await ProductService();
       if(responseData !== null){
-        debugger;
+        // debugger;
         this.setState({responseData: responseData});
       }
   }
@@ -76,7 +77,7 @@ class Items extends Component{
         this.setState({products: tempArray});
     }else{
       console.log('inside cellRenderer() else');
-      debugger;
+      // debugger;
       this.setState({products: this.state.responseData});
     }
   }
@@ -92,7 +93,10 @@ class Items extends Component{
           <Grid item xs={12}>
             <Grid container className={classes.demo} spacing={Number(spacing)}>
               {
-              products.map((product, index) => (
+              products.map((product, index) => {
+                let linkPath = '/product?brandId='+product.brand_id;
+                return(
+                  <NavLink to={linkPath}>
                 <Grid key={index} item>
                   <Paper className={classes.paper} >
                       <ul>
@@ -104,7 +108,8 @@ class Items extends Component{
                       </ul>  
                   </Paper>
                 </Grid>
-              ))}
+                </NavLink>
+              )})}
             </Grid>
           </Grid>
         </Grid>
