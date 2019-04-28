@@ -72,8 +72,8 @@ class SimpleAppBar extends React.Component{
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
-                  <MenuItem value="priceLowToHigh">Price: Low to High</MenuItem>
-                  <MenuItem value="priceHighToLow">Price: High to Low</MenuItem>
+                  <MenuItem value="priceAsc">Price: Low to High</MenuItem>
+                  <MenuItem value="priceDesc">Price: High to Low</MenuItem>
                 </Select>
               </FormControl>
           </form>            

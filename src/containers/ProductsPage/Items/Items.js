@@ -28,19 +28,19 @@ const styles = theme => ({
 });
   
 class Items extends Component{
-    state = {
-        spacing: '16',
-        products: null,
-        hasError: false,
-        filtersArray: [],
-        responseData: null,
-        sortBy: ''
-    };
-    handleChange = key => (event, value) => {
-        this.setState({
-          [key]: value,
-        });
-    };    
+  state = {
+      spacing: '16',
+      products: null,
+      hasError: false,
+      filtersArray: [],
+      responseData: null,
+      sortBy: ''
+  };
+  handleChange = key => (event, value) => {
+    this.setState({
+      [key]: value,
+    });
+  };    
   async componentDidMount(){
     await this.fetchResponseData();
     this.cellRenderer(this.state.filtersArray);
@@ -54,11 +54,13 @@ class Items extends Component{
   */
   componentWillReceiveProps(nextProps){
     if(nextProps.filtersArray !== this.state.filtersArray){
-      this.cellRenderer(nextProps.filtersArray);
-      this.setState({filtersArray: nextProps.filtersArray});
+      this.setState({filtersArray: nextProps.filtersArray, sortBy: nextProps.sortBy});
+      if(nextProps.sortBy !== this.state.sortBy){
+        this.cellRenderer(nextProps.filtersArray, nextProps.sortBy);
+      }  
     }
-    if(nextProps.sortBy !== this.props.sortBy){
-      this.sortBy(nextProps.sortBy);
+    else if(nextProps.sortBy !== this.props.sortBy){
+      this.cellRenderer(this.state.filtersArray, nextProps.sortBy);
     }
   }
   
@@ -68,7 +70,25 @@ class Items extends Component{
         this.setState({responseData: responseData});
       }
   }
-  cellRenderer = (filtersArray) => {
+  sortAsc( a, b ) {
+    if ( a.price < b.price ){
+      return -1;
+    }
+    if ( a.price > b.price ){
+      return 1;
+    }
+    return 0;
+  }  
+  sortDesc( a, b ) {
+    if ( a.price < b.price ){
+      return 1;
+    }
+    if ( a.price > b.price ){
+      return -1;
+    }
+    return 0;
+  }  
+  cellRenderer = (filtersArray, sortBy) => {
     if(filtersArray !== undefined && filtersArray.length > 0){
       let tempArray = [];
       this.state.responseData.forEach(function(product, index){
@@ -77,16 +97,25 @@ class Items extends Component{
             tempArray.push(product);
         }
       })
-      if(tempArray.length > 0)
+      if(tempArray.length > 0){
+        if(sortBy === 'priceAsc')
+          tempArray.sort(this.sortAsc);
+        if(sortBy === 'priceDesc')
+          tempArray.sort(this.sortDesc);        
         this.setState({products: tempArray});
+      }
+    }else if(sortBy !== ''){
+        let updatedData = this.state.responseData;
+        if(sortBy === 'priceAsc')
+         updatedData.sort(this.sortAsc);
+        if(sortBy === 'priceDesc')
+         updatedData.sort(this.sortDesc);        
+         this.setState({products: updatedData});
     }else{
-      this.setState({products: this.state.responseData});
+          this.setState({products: this.state.responseData});
     }
   }
 
-  sortBy = (parameter) => {
-    
-  }
   render(){
       let products = this.state.products;
       const { classes } = this.props;
