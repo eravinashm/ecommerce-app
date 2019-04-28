@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 
 import Filters from './Filters/Filters';
 import Items from './Items/Items';
+import SimpleAppBar from './SimpleAppBar';
 
 const styles = theme => ({
     root: {
@@ -38,6 +39,7 @@ class ProductsPage extends Component{
                     </Grid>
                     <Grid item xs={9}>
                         <Paper className={classes.paper}>
+                            <SimpleAppBar />
                             <Items filtersArray={this.state.filtersArray}/>
                         </Paper>
                     </Grid>

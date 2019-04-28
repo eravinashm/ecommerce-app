@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Checkbox from '@material-ui/core/Checkbox';
+// import Checkbox from '@material-ui/core/Checkbox';
 
 import BrandsService from '../../../services/Brands/Brands';
 
@@ -19,7 +19,7 @@ class Filters extends Component{
         }
     } 
     changeHandler = (event, brandId) => {
-        console.log(event.target.checked)
+        // console.log(event.target.checked)
         if(event.target.checked){
             if(!this.state.filtersArray.includes(brandId)){
                 let updatedArray = [...this.state.filtersArray, brandId];

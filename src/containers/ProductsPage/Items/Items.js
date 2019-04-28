@@ -2,15 +2,16 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import Radio from '@material-ui/core/Radio';
+// import FormLabel from '@material-ui/core/FormLabel';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import RadioGroup from '@material-ui/core/RadioGroup';
+// import Radio from '@material-ui/core/Radio';
 import Paper from '@material-ui/core/Paper';
-import {Link, NavLink} from 'react-router-dom';
+import { NavLink} from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import ProductService from '../../../services/Products/Products';
-import MediaCard from '../../../components/MediaCard/MediaCard';
+// import MediaCard from '../../../components/MediaCard/MediaCard';
 import './Items.css';
 
 const styles = theme => ({
@@ -32,7 +33,8 @@ class Items extends Component{
         products: null,
         hasError: false,
         filtersArray: [],
-        responseData: null
+        responseData: null,
+        sortBy: ''
     };
     handleChange = key => (event, value) => {
         this.setState({
@@ -55,19 +57,21 @@ class Items extends Component{
       this.cellRenderer(nextProps.filtersArray);
       this.setState({filtersArray: nextProps.filtersArray});
     }
+    if(nextProps.sortBy !== this.props.sortBy){
+      this.sortBy(nextProps.sortBy);
+    }
   }
+  
   fetchResponseData = async() => {
       let responseData = await ProductService();
       if(responseData !== null){
-        // debugger;
         this.setState({responseData: responseData});
       }
   }
   cellRenderer = (filtersArray) => {
     if(filtersArray !== undefined && filtersArray.length > 0){
-      console.log('inside cellRenderer() if');
       let tempArray = [];
-      this.state.responseData.map((product, index) => {
+      this.state.responseData.forEach(function(product, index){
         for(let id of filtersArray){
           if(product.brand_id === id)
             tempArray.push(product);
@@ -76,10 +80,12 @@ class Items extends Component{
       if(tempArray.length > 0)
         this.setState({products: tempArray});
     }else{
-      console.log('inside cellRenderer() else');
-      // debugger;
       this.setState({products: this.state.responseData});
     }
+  }
+
+  sortBy = (parameter) => {
+    
   }
   render(){
       let products = this.state.products;
@@ -94,9 +100,9 @@ class Items extends Component{
             <Grid container className={classes.demo} spacing={Number(spacing)}>
               {
               products.map((product, index) => {
-                let linkPath = '/product?brandId='+product.brand_id;
+                let linkPath = '/product?id='+product.id;
                 return(
-                  <NavLink to={linkPath}>
+                  <NavLink to={linkPath} key={index}>
                 <Grid key={index} item>
                   <Paper className={classes.paper} >
                       <ul>
@@ -105,6 +111,7 @@ class Items extends Component{
                         </li>
                         <li>{product.name}</li>
                         <li>{product.brand_id}</li>
+                        <li>$ {product.price}</li>
                       </ul>  
                   </Paper>
                 </Grid>
@@ -121,5 +128,12 @@ Items.propTypes = {
     classes: PropTypes.object.isRequired,
   };
   
-export default withStyles(styles)(Items);
+const mapStateToProps = state => {
+  // console.log(state.sortByReducer.sortBy);
+  return{
+    sortBy: state.sortByReducer.sortBy
+  }
+}
+
+export default withStyles(styles)(connect(mapStateToProps)(Items));
   

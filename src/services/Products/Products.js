@@ -1,4 +1,4 @@
-import axios from 'axios';
+// import axios from 'axios';
 import { BASE_URL } from '../../constants/constants';
 
 function status(response) {
@@ -19,7 +19,7 @@ const products = async() => {
     .then(status)
     .then(json)
     .then(function(data) {
-        console.log('Request succeeded with JSON response', data);
+        // console.log('Request succeeded with JSON response', data);
         responseData = data;
       }).catch(function(error) {
         console.log('Request failed', error);
