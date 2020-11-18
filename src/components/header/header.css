@@ -1,0 +1,11 @@
+.header{
+    height: 70px;
+    width: 100%;
+    background: cornflowerblue;
+    color: #fff;
+    display: flex;
+    justify-content: space-evenly;
+}
+.header-cart{
+    padding-top: 30px;
+}

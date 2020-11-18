@@ -1,0 +1,31 @@
+.product{
+    width: 250px;
+    height: 300px;
+    border: solid 1px lightgray;
+    border-radius: 10px;
+    padding: 20px;
+    align-self: center;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+.product-btn{    
+    background-color: cornflowerblue;
+    color: #fff;
+    border: solid 1px cornflowerblue;
+    height: 30px;
+    width: 100px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.view-add-btns{
+    display: flex;
+    justify-content: space-between;
+}
+.buy-btn{
+    margin-top: 10px;
+    width: 100px;
+    margin-top: 10px;
+    width: 250px;
+}
+.product img{
+    height: 150px;
+}

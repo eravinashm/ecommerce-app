@@ -1,0 +1,21 @@
+.no-products-cart{
+    color: greenyellow;
+}
+.cart-products li{
+    display: flex;
+    justify-content: space-evenly;
+    box-shadow: 0 4px 8px 0 lightblue;
+    padding: 10px;
+}
+.cart-heading{
+    text-align: center;
+}
+.cart-products li .name{
+    font-weight: bold;
+}
+.cart-products li div img{
+    height: 50px;
+}
+.cart-products{
+    padding-right: 100px;
+}
