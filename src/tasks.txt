@@ -1,4 +1,6 @@
 1) header cart update - done
 2) totalAmount on cart - done
-3) add stripe payment gateway
+3) add stripe payment gateway client - done
 4) single product view page 
+5) server side payment gateway read docs , try
+6) magnify image on hover 
