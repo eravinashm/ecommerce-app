@@ -26,7 +26,7 @@ class Products extends React.Component{
             <div className="products">
             {products.length > 0 ?
                 <React.Fragment>
-                    {products.map(product => <Product product={product} addToCart={this.addToCart} /> )}
+                    {products.map(product => <Product key={product.id} product={product} addToCart={this.addToCart} /> )}
                 </React.Fragment> 
                 : <div>Loading...</div>
             }

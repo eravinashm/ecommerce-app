@@ -23,6 +23,5 @@ export default async function fetchService(api){
   .catch(function(error){
     console.log(" error in fetchService ", api, error);
   })
-  console.log(" fetch ", responseData)
   return responseData;
 }

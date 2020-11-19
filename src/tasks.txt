@@ -1,0 +1,4 @@
+1) header cart update - done
+2) totalAmount on cart - done
+3) add stripe payment gateway
+4) single product view page 
