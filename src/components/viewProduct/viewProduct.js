@@ -4,17 +4,16 @@ import { withRouter } from 'react-router-dom';
 import './viewProduct';
 
 function ViewProduct(props){
-    console.log(" ViewProduct props ", props);
+    console.log(" ViewProduct props ", props.products);
     let search = new URLSearchParams(props.location.search);
     let id = search.get("id"), selected = null;
     
     if(id != "" && id != undefined && id != null && props.products != undefined){
+        console.log(" products ", props.products);
         selected = props.products.map(product => {
-//            console.log(" id ", id, "  product ", product);
             if(product.id == id.toString())
                 return product;
         });
-  //      console.log(" selected ", selected);
     }
 
     return(
@@ -43,11 +42,4 @@ function ViewProduct(props){
     )
 }
 
-const mapStateToProps = state => {
-    console.log(" mapStateToProps ", state.product.products)
-    return{
-        products: state.product.products
-    }
-}
-
-export default connect(mapStateToProps)(withRouter(ViewProduct));
+export default withRouter(ViewProduct);

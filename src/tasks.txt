@@ -5,3 +5,6 @@
 5) server side payment gateway read docs , try
 6) magnify image on hover 
 7) add redux for global state of products - done
+last => 8) add redux-thunk for async calls https://redux.js.org/tutorials/essentials/part-5-async-logic
+9) move api products call logic from products to App.js for passing to ViewCart and products
+last => 10)https://github.com/reduxjs/reselect

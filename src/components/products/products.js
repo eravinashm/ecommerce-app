@@ -1,21 +1,12 @@
 import React from 'react';
-import fetchService from '../../fetchService';
 import Product from './product/product';
 import './products.css';
-import { connect } from 'react-redux';
 
 class Products extends React.Component{
     state = {
-        products: [],
         cart: []
     }
-    async componentDidMount(){
-        let products = await fetchService('products')
-        if(products.length > 0){
-            this.props.storeProducts(products);
-            this.setState({ products });
-        }
-    }
+
     addToCart = product  => {
         let { cart } = this.state;
         cart.push(product);
@@ -24,7 +15,8 @@ class Products extends React.Component{
     }
 
     render(){
-        let { products } = this.state;
+        let { products } = this.props;
+        console.log(" products ", products);
         return(
             <div className="products">
             {products.length > 0 ?
@@ -38,11 +30,4 @@ class Products extends React.Component{
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        // dispatching plain actions
-        storeProducts: (data) => dispatch({ type: "STORE_PRODUCTS", payload: data})
-    }
-}
-
-export default connect(null, mapDispatchToProps)(Products);
+export default Products;
