@@ -4,3 +4,4 @@
 4) single product view page 
 5) server side payment gateway read docs , try
 6) magnify image on hover 
+7) add redux for global state of products

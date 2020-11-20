@@ -4,9 +4,17 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-const Render = (
-            <App/>
-);
+import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
+import productReducer from './redux/productReducer';
+
+const rootReducers = combineReducers({
+    product: productReducer
+});
+
+const store = createStore(rootReducers);
+
+const Render = (<Provider store={store}><App /></Provider>);
 
 ReactDOM.render(Render, document.getElementById('root'));
 

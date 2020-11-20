@@ -20,12 +20,7 @@
     display: flex;
     justify-content: space-between;
 }
-.buy-btn{
-    margin-top: 10px;
-    width: 100px;
-    margin-top: 10px;
-    width: 250px;
-}
 .product img{
     height: 150px;
 }
+

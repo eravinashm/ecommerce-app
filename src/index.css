@@ -16,3 +16,19 @@ code {
 ul li{
   list-style-type: none;
 }
+
+.buy-btn{
+  margin-top: 10px;
+  width: 100px;
+  margin-top: 10px;
+  width: 250px;
+}
+.product-btn{    
+  background-color: cornflowerblue;
+  color: #fff;
+  border: solid 1px cornflowerblue;
+  height: 30px;
+  width: 100px;
+  border-radius: 10px;
+  cursor: pointer;
+}
