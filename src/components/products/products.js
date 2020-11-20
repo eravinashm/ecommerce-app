@@ -39,7 +39,7 @@ class Products extends React.Component{
 }
 
 const mapDispatchToProps = dispatch => {
-    return{
+    return {
         // dispatching plain actions
         storeProducts: (data) => dispatch({ type: "STORE_PRODUCTS", payload: data})
     }

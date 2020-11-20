@@ -9,7 +9,7 @@ import ViewProduct from './components/viewProduct/viewProduct';
 require('dotenv').config()
 
 export default function App(props){
-    console.log(" props ", props);
+    // console.log(" props ", props);
     let [cart, setCart] = useState([]);
     let [quantity, setQuantity] = useState(0);
     function callbackCart(cart){
