@@ -6,10 +6,12 @@ import * as serviceWorker from './serviceWorker';
 
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import productReducer from './redux/productReducer';
+import productReducer from './redux/reducers/productReducer';
+import cartReducer from './redux/reducers/cartReducer';
 
 const rootReducers = combineReducers({
-    product: productReducer
+    product: productReducer,
+    cart: cartReducer
 });
 
 const store = createStore(rootReducers);

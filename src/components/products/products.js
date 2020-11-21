@@ -3,20 +3,17 @@ import Product from './product/product';
 import './products.css';
 
 class Products extends React.Component{
-    state = {
-        cart: []
-    }
-
     addToCart = product  => {
-        let { cart } = this.state;
+        console.log(" product ", product);
+        let { cart } = this.props;
         cart.push(product);
         this.props.callbackCart(cart);
-        this.setState({ cart });
     }
 
     render(){
+        console.log(" Products.js props ", this.props);
         let { products } = this.props;
-        console.log(" products ", products);
+
         return(
             <div className="products">
             {products.length > 0 ?

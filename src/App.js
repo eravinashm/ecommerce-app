@@ -12,48 +12,57 @@ require('dotenv').config()
 
 function App(props){
     // console.log(" props ", props);
-    let [cart, setCart] = useState([]);
+    // let [cart, setCart] = useState([...props.cart]);
     let [quantity, setQuantity] = useState(0);
     let [products, setProducts] = useState([]);
 
     function callbackCart(cart){
-        setCart(cart);
+        // setCart(cart);
+        props.addProductToCart(cart);
         setQuantity(cart.length);
     }
 
     async function makeAPICall(){
         let responseData = await fetchService('products');
-        console.log(" responseData ", responseData);
+        // console.log(" responseData ", responseData);
         if(responseData.length > 0){        
             setProducts(responseData);
-            // props.storeProducts(responseData);
+            props.storeProducts(responseData);
         }    
     }
 
     useEffect(() => {
+        // console.log(" props.cart ", props.cart);
         if(products.length === 0) makeAPICall();
-        if(cart.length > 0) setQuantity(cart.length);
+        if(props.cart.length > 0) setQuantity(props.cart.length);
         else setQuantity(0);
-    }, [cart, products]);
+    }, [props.cart, products]);
+
     return(
         <Router>
             <Header quantity={quantity} />
             <Switch>
-                <Route exact path="/"><Products callbackCart={callbackCart} products={products} /></Route>
-                <Route exact path="/your-cart"><Cart cart={cart} /></Route>
+                <Route exact path="/"><Products products={products} callbackCart={callbackCart} cart={props.cart} /></Route>
+                <Route exact path="/your-cart"><Cart cart={props.cart} /></Route>
                 <Route  path="/checkout"><CardDemo stripePublicKey={process.env.REACT_APP_STRIPE_PUBLIC_KEY} /></Route>
-                <Route  path="/view-product"><ViewProduct products={products} /></Route>
+                <Route  path="/view-product"><ViewProduct products={products} callbackCart={callbackCart} cart={props.cart} /></Route>
                 <Route render={() => <div>Page Not Found</div>} />
             </Switch>
         </Router>
     )
 }
 
+const mapStateToProps = state => {
+    return {
+        cart: state.cart.cart
+    }
+}
 const mapDispatchToProps = dispatch => {
     return {
         // dispatching plain actions
-        storeProducts: (data) => dispatch({ type: "STORE_PRODUCTS", payload: data})
+        storeProducts: (data) => dispatch({ type: "STORE_PRODUCTS", payload: data}),
+        addProductToCart: (data) => dispatch({ type: "ADD_CART", payload: data }) 
     }
 }
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
