@@ -5,7 +5,6 @@ const initialState = {
 }
 
 export default function productReducer(state = initialState, action){
-    console.log(" action ", action);
     switch(action.type){
         case actionTypes.STORE_PRODUCTS: {
             return {

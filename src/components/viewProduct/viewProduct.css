@@ -2,7 +2,7 @@
     border: solid 1px lightgray;
     height: 300px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     margin: 20px;
     padding: 40px;
     box-shadow: 0 0 2px 4px lightgrey;
@@ -12,6 +12,15 @@
 }
 .similar-products{
     width: 100%;
+}
+.clicked-small-images{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    cursor: pointer;
+}
+.clicked-small-images img{
+    width: 50%;
 }
 /* magnify glass */
 .glass {
@@ -30,3 +39,4 @@
     /* hide the glass by default */
     display: none;
   }
+
