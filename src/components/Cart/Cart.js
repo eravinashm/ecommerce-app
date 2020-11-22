@@ -5,6 +5,7 @@ class Cart extends React.Component{
     render(){
         let totalAmount = 0;
         if(this.props.cart.length > 0){
+            console.log(" this.props.cart ", this.props.cart);
             totalAmount = this.props.cart.reduce((p1, p2) => {
                 console.log(" p1 ", p1.price, " p2 ", p2.price);
                 return +(p1.price)+(+(p2.price))

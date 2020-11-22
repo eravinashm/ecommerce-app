@@ -11,13 +11,10 @@ import fetchService from './fetchService';
 require('dotenv').config()
 
 function App(props){
-    // console.log(" props ", props);
-    // let [cart, setCart] = useState([...props.cart]);
     let [quantity, setQuantity] = useState(0);
     let [products, setProducts] = useState([]);
 
     function callbackCart(cart){
-        // setCart(cart);
         props.addProductToCart(cart);
         setQuantity(cart.length);
     }

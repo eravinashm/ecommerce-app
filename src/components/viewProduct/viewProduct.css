@@ -22,6 +22,18 @@
 .clicked-small-images img{
     width: 50%;
 }
+.slick-prev {
+    left: 25px !important;
+    background-color: #000;
+    z-index: 1;
+}
+.slick-next {
+    right: 100px !important;
+    background-color: #000;
+}
+.slick-next:focus, .slick-next:hover, .slick-prev:focus, .slick-prev:hover{
+    background-color: cornflowerblue;
+}
 /* magnify glass */
 .glass {
     width: 150px;

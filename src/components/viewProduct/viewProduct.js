@@ -4,8 +4,10 @@ import Product from '../products/product/product';
 import './viewProduct.css';
 import Slider from 'react-slick';
 import campstoolSmall from './shopping-cart/campstool-1_160x160.jpg';
-import campstoolBig from './shopping-cart/campstool-1_1024x1024@2x.jpg';
+// import campstoolBig from './shopping-cart/campstool-1_1024x1024@2x.jpg';
 import MagnifyGlass from '../MagnifyGlass/MagnifyGlass';
+// import "~slick-carousel/slick/slick.css"; 
+// import "~slick-carousel/slick/slick-theme.css";
 
 class ViewProduct extends React.Component {
     addToCart = product  => {
@@ -22,12 +24,14 @@ class ViewProduct extends React.Component {
             selected = this.props.products.filter(product => product.id == id.toString());
         }
         const settings = {
-            dots: true,
-            infinite: true,
+            dots: false,
+            infinite: false,
             speed: 500,
-            slidesToShow: 1,
-            slidesToScroll: 1
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            arrows: true
         };
+        console.log(" this.props.products ", (this.props.products)[0]);
         return(
             <React.Fragment>
                 <div className="view-product">
@@ -53,34 +57,14 @@ class ViewProduct extends React.Component {
                                 </div>
                         </div>
                     }
-                    {/* <div className="remaining-products">
+                    <div className="remaining-products">
                         {this.props.products.length > 0 &&
-                            <React.Fragment>
-                                {this.props.products.map(product => <Product key={product.id} product={product} {...this.props} addToCart={this.addToCart}/>)}
-                            </React.Fragment>
+                            <Slider {...settings}>
+                                {this.props.products.map(product => <Product key={product.id} product={product} {...this.props} addToCart={this.addToCart} />)}
+                            </Slider>
                         }  
-                    </div> */}
+                    </div>
                 </div>
-                <Slider {...settings}>
-                    <div>
-                        <h3>1</h3>
-                    </div>
-                    <div>
-                        <h3>2</h3>
-                    </div>
-                    <div>
-                        <h3>3</h3>
-                    </div>
-                    <div>
-                        <h3>4</h3>
-                    </div>
-                    <div>
-                        <h3>5</h3>
-                    </div>
-                    <div>
-                        <h3>6</h3>
-                    </div>
-                </Slider>
         </React.Fragment>
         )
     }
