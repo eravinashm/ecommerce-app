@@ -14,14 +14,32 @@ function App(props){
     let [quantity, setQuantity] = useState(0);
     let [products, setProducts] = useState([]);
 
-    function callbackCart(cart){
+    function callbackCart(product){
+        let { cart } = props;
+        if(cart.length > 0){
+            let isDuplicate = false;
+            for(let car of cart){
+                if(car.id === product.id){
+                    isDuplicate = true;
+                    car.count = isNaN(car.count) ? 1: car.count + 1;
+                } 
+            }
+            if(!isDuplicate){
+                product.count = 1;
+                cart.push(product);
+            } 
+        }else{
+            product.count = 1;
+            cart.push(product);
+        } 
+                
         props.addProductToCart(cart);
-        setQuantity(cart.length);
+        
+//        setQuantity(cart.length);
     }
 
     async function makeAPICall(){
         let responseData = await fetchService('products');
-        // console.log(" responseData ", responseData);
         if(responseData.length > 0){        
             setProducts(responseData);
             props.storeProducts(responseData);

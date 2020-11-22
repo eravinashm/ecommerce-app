@@ -10,11 +10,6 @@ import MagnifyGlass from '../MagnifyGlass/MagnifyGlass';
 // import "~slick-carousel/slick/slick-theme.css";
 
 class ViewProduct extends React.Component {
-    addToCart = product  => {
-        let { cart } = this.props;
-        cart.push(product);
-        this.props.callbackCart(cart);
-    }
 
     render(){
         let search = new URLSearchParams(this.props.location.search);
@@ -31,7 +26,6 @@ class ViewProduct extends React.Component {
             slidesToScroll: 1,
             arrows: true
         };
-        console.log(" this.props.products ", (this.props.products)[0]);
         return(
             <React.Fragment>
                 <div className="view-product">
@@ -50,7 +44,7 @@ class ViewProduct extends React.Component {
                                         <li>{selected[0].name}</li>
                                         <li>${selected[0].price}</li>
                                         <li>
-                                            <button className="buy-btn product-btn" onClick={() => this.addToCart(selected)}>Add to Cart</button>
+                                            <button className="buy-btn product-btn" onClick={() => this.props.callbackCart(selected[0])}>Add to Cart</button>
                                             <button className="buy-btn product-btn">Buy Now</button>
                                         </li>
                                     </ul>
@@ -60,7 +54,7 @@ class ViewProduct extends React.Component {
                     <div className="remaining-products">
                         {this.props.products.length > 0 &&
                             <Slider {...settings}>
-                                {this.props.products.map(product => <Product key={product.id} product={product} {...this.props} addToCart={this.addToCart} />)}
+                                {this.props.products.map(product => <Product key={product.id} product={product} {...this.props} />)}
                             </Slider>
                         }  
                     </div>

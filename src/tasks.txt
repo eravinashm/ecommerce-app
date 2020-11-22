@@ -11,3 +11,5 @@ last => 10)https://github.com/reduxjs/reselect
 11) add redux for cart - done
 12) add slick-slider for view similar products - done
 13) clicked multiple small images viewPage - done
+14)user signup login
+15) set cart number in header reduce 
