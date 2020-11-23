@@ -6,6 +6,12 @@
     display: flex;
     justify-content: space-evenly;
 }
-.header-cart{
-    padding-top: 30px;
+.header-btn{
+    background-color: #fff;
+    color: cornflowerblue;
+    border: solid 1px cornflowerblue;
+    height: 30px;
+    width: 100px;
+    border-radius: 10px;
+    cursor: pointer;
 }

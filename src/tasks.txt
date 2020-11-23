@@ -1,7 +1,7 @@
 1) header cart update - done
 2) totalAmount on cart - done
 3) add stripe payment gateway client - done
-4) single product view page 
+4) single product view page - done
 5) server side payment gateway read docs , try
 6) magnify image on hover - done 
 7) add redux for global state of products - done
@@ -11,5 +11,5 @@ last => 10)https://github.com/reduxjs/reselect
 11) add redux for cart - done
 12) add slick-slider for view similar products - done
 13) clicked multiple small images viewPage - done
-14)user signup login
+14)user signup login implement formik
 15) set cart number in header reduce 
