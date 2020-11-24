@@ -4,7 +4,11 @@ import { Link } from 'react-router-dom';
 import Modal from '../../components/Modal/modal';
 
 function Header(props){
-    let [modalType, setModalType] = useState("login");
+    let [modalType, setModalType] = useState("");
+    const close = () => { 
+        setModalType(""); 
+        document.body.style.overflow = "auto";
+    }
     return(
         <React.Fragment>
             <div className="header">
@@ -17,7 +21,7 @@ function Header(props){
                     <button className="header-btn" onClick={() => setModalType("signup")}>Signup</button>
                 </div>
             </div>
-            {modalType != "" && <Modal modalType={modalType} />}
+            {modalType != "" && <Modal modalType={modalType} callback={close} />}
         </React.Fragment>
     )
 }
