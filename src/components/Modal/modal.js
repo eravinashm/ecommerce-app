@@ -1,6 +1,6 @@
 import React from 'react';
 import './modal.css';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import LoginForm from './LoginForm';
 
 class Modal extends React.Component{
     state = {
@@ -40,10 +40,6 @@ class Modal extends React.Component{
         this.setState({ modalType: type });
     }
 
-    submitLoginData = values => {
-        console.log(values);
-    }
-
     render(){
         return(
             <div id="myModal" className="modal">
@@ -51,65 +47,11 @@ class Modal extends React.Component{
                 <div className="modal-content">
                     <span className="close">&times;</span>
                     <div className="tabs">
-                        <div className={this.state.modalType === "login" ? "active": ""} onClick={() => this.clickHandler("login")}>Login</div>
-                        <div className={this.state.modalType === "signup" ? "active": ""} onClick={() => this.clickHandler("signup")}>Signup</div>
+                        <div className={this.state.modalType === "login" ? "active": "inactive"} onClick={() => this.clickHandler("login")}>Login</div>
+                        <div className={this.state.modalType === "signup" ? "active": "inactive"} onClick={() => this.clickHandler("signup")}>Signup</div>
                     </div>
                     {this.state.modalType === "login" ? 
-                    <div>
-                        <Formik
-                         initialValues={{ email: '', password: '' }}
-                         validate={values => {
-                            const errors = {};
-                            if(!values.email){
-                                errors.email = 'Required';
-                            }else if(
-                            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-                            ){
-                                errors.email = 'Invalid email address';
-                            }
-                            return errors;
-                         }}
-                         onSubmit={(values, { setSubmitting }) => {
-                             setTimeout(() => {
-                                this.submitLoginData(values);
-                                 setSubmitting(false);
-                             }, 400);
-                         }}
-                        >
-                            {({ 
-                                values,
-                                errors,
-                                touched,
-                                handleChange,
-                                handleBlur,
-                                handleSubmit,
-                                isSubmitting 
-                            }) => (
-                                <form onSubmit={handleSubmit}>
-                                    <input 
-                                     type="email"
-                                     name="email"
-                                     onChange={handleChange}
-                                     onBlur={handleBlur}
-                                     value={values.email}
-                                    />
-                                    {errors.email && touched.emal && errors.email}
-                                    <input
-                                     type="password"
-                                     name="password"
-                                     onChange={handleChange}
-                                     onBlur={handleBlur}
-                                     value={values.password}
-                                    />
-                                    {errors.password && touched.password && errors.password}
-                                    <button type="submit" disabled={isSubmitting}>
-                                        Submit
-                                    </button>
-                                </form>
-                            )}
-                        </Formik>    
-                    </div>:
-                    <div>Signup </div>
+                        <LoginForm />:<div>Signup </div>
                     }   
                 </div>
             </div>        
