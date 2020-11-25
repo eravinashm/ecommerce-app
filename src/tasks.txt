@@ -10,5 +10,5 @@
 12) add slick-slider for view similar products - done
 13) clicked multiple small images viewPage - done
 14)user signup login implement formik - done
-15) set cart number in header reduce 
-adding firebase authentication
+15) set cart number in header reduce - done
+adding firebase authentication - done

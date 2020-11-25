@@ -5,27 +5,19 @@ import Modal from '../../components/Modal/modal';
 import { connect } from 'react-redux';
 
 function Header(props){
-    console.log('top header props.cart ', props.cart);
     let [modalType, setModalType] = useState("");
-    let [quantity, setQuantity] = useState(props.cart.length);
 
     const close = useCallback(() => { 
         setModalType(""); 
         document.body.style.overflow = "auto";
-    }, []);
-
-    useEffect(() => {
-        console.log(" header useEffect props ", props.cart)
-        if(props.cart.length > 0) setQuantity(props.cart.length);
-        else setQuantity(0);
-    }, [props.cart]);
+    }, []);    
 
     return(
         <React.Fragment>
             <div className="header">
                 <h1><Link to="/">Shopping Cart</Link></h1>
                 <div className="paddingTop-30">
-                    <Link to="/your-cart">Cart: {quantity}</Link>
+                    <Link to="/your-cart">Cart: {props.quantity}</Link>
                 </div>
                 <div className="paddingTop-30">
                     <button className="header-btn" id="login-Btn" onClick={() => setModalType("login")}>Login</button>
@@ -38,8 +30,14 @@ function Header(props){
 }
 
 const mapStateToProps = state => {
+    let updatedQuantity = 0;
+    if((state.cart.cart) != undefined && (state.cart.cart).length > 0){
+        (state.cart.cart).forEach(product => {
+            if(product.count != undefined) updatedQuantity += product.count;
+        })
+    }    
     return {
-        cart: state.cart.cart
+        quantity: updatedQuantity
     }
 }
 

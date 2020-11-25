@@ -11,7 +11,6 @@ import fetchService from './fetchService';
 require('dotenv').config()
 
 function App(props){
-    let [quantity, setQuantity] = useState(0);
     let [products, setProducts] = useState([]);
 
     function callbackCart(product){
@@ -32,10 +31,7 @@ function App(props){
             product.count = 1;
             cart.push(product);
         } 
-                
         props.addProductToCart(cart);
-        
-//        setQuantity(cart.length);
     }
 
     async function makeAPICall(){
@@ -47,15 +43,12 @@ function App(props){
     }
 
     useEffect(() => {
-        // console.log(" props.cart ", props.cart);
         if(products.length === 0) makeAPICall();
-        if(props.cart.length > 0) setQuantity(props.cart.length);
-        else setQuantity(0);
-    }, [props.cart, products]);
+    }, [products]);
 
     return(
         <Router>
-            <Header quantity={quantity} />
+            <Header />
             <Switch>
                 <Route exact path="/"><Products products={products} callbackCart={callbackCart} cart={props.cart} /></Route>
                 <Route exact path="/your-cart"><Cart cart={props.cart} /></Route>
@@ -72,6 +65,7 @@ const mapStateToProps = state => {
         cart: state.cart.cart
     }
 }
+
 const mapDispatchToProps = dispatch => {
     return {
         // dispatching plain actions
