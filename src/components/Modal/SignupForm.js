@@ -3,11 +3,10 @@ import { useFormik } from 'formik';
 
 const validate = values => {
     const errors = {};
-
     if (!values.username) {
         errors.username = 'Required';
     }else if(values.username.length < 5){
-        errors.password = 'Must be  greater or equal to 6 characters';
+        errors.username = 'Must be  greater or equal to 6 characters';
     }
 
     if (!values.email) {
@@ -24,18 +23,18 @@ const validate = values => {
     return errors;
 }
 
-const SignupForm = () => {
+const SignupForm = props => {
     const formik = useFormik({
         initialValues: {
-            email: '',
-            password: ''
+            username: 'raman dev',
+            email: 'testacc12345@gmail.com',
+            password: 'test@123456'
         },
         validateOnBlur: false,
         validateOnChange:false,
         validate,
         onSubmit: values => {
-            console.log(" values" , values);
-            alert(JSON.stringify(values, null, 2));
+            props.signup(values);
         }
     });
     return(

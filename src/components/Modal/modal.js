@@ -3,7 +3,13 @@ import './modal.css';
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
 
-class Modal extends React.Component{
+import withFirebaseAuth from 'react-with-firebase-auth'
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import config from '../../firebase/config';
+const firebaseApp = firebase.initializeApp(config);
+
+class Modal extends React.Component {
     state = {
         modalType: this.props.modalType        
     }
@@ -43,7 +49,6 @@ class Modal extends React.Component{
     }
 
     componentDidUpdate(prevProps, prevState, snapshot){
-        console.log(" this.props.modalType ", this.props.modalType);
         if(this.props.modalType != prevProps.modalType)
             this.setState({ modalType: this.props.modalType});
     }
@@ -52,7 +57,16 @@ class Modal extends React.Component{
         this.setState({ modalType: type });
     }
 
+    login = values => {
+        console.log(" values ", values);
+    }
+    signup = values => {
+        console.log(" values ", values);
+        this.props.createUserWithEmailAndPassword(values.email, values.password);
+    }
+
     render(){
+        console.log(" this.props ", this.props);
         return(
             <div id="myModal" className="modal">
 
@@ -62,11 +76,21 @@ class Modal extends React.Component{
                         <div className={this.state.modalType === "login" ? "active": "inactive"} onClick={() => this.clickHandler("login")}>Login</div>
                         <div className={this.state.modalType === "signup" ? "active": "inactive"} onClick={() => this.clickHandler("signup")}>Signup</div>
                     </div>
-                    {this.state.modalType === "login" ? <LoginForm />:<SignupForm />}   
+                    {this.state.modalType === "login" ? <LoginForm login={this.login} />:<SignupForm signup={this.signup} />}   
                 </div>
             </div>        
         )
     }
 }
 
-export default Modal;
+
+const firebaseAppAuth = firebaseApp.auth();
+
+const providers = {
+  googleProvider: new firebase.auth.GoogleAuthProvider(),
+};
+
+export default withFirebaseAuth({
+    providers,
+    firebaseAppAuth,
+  })(Modal);

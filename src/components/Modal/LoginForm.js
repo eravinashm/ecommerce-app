@@ -18,18 +18,18 @@ const validate = values => {
     return errors;
 }
 
-const LoginForm = () => {
+const LoginForm = props => {
     const formik = useFormik({
         initialValues: {
-            email: '',
-            password: ''
+            email: 'test@gmail.com',
+            password: 'test@12345'
         },
         validateOnBlur: false,
         validateOnChange:false,
         validate,
         onSubmit: values => {
             console.log(" values" , values);
-            alert(JSON.stringify(values, null, 2));
+            // console.log(" Firebase ", new Firebase());
         }
     });
     return(
@@ -60,3 +60,13 @@ const LoginForm = () => {
 }
 
 export default LoginForm;
+
+/*
+  componentDidMount() {
+    auth.getAuth().onAuthStateChanged(user => {
+      if (user) {
+        this.props.history.push('/dashboard');
+      }
+    });
+  }
+*/

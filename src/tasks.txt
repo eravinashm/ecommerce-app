@@ -5,11 +5,10 @@
 5) server side payment gateway read docs , try
 6) magnify image on hover - done 
 7) add redux for global state of products - done
-last => 8) add redux-thunk for async calls https://redux.js.org/tutorials/essentials/part-5-async-logic
 9) move api products call logic from products to App.js for passing to ViewCart and products - done
-last => 10)https://github.com/reduxjs/reselect
 11) add redux for cart - done
 12) add slick-slider for view similar products - done
 13) clicked multiple small images viewPage - done
-14)user signup login implement formik
+14)user signup login implement formik - done
 15) set cart number in header reduce 
+adding firebase authentication

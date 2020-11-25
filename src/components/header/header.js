@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Modal from '../../components/Modal/modal';
 
 function Header(props){
-    let [modalType, setModalType] = useState("");
+    let [modalType, setModalType] = useState("signup");
     const close = () => { 
         setModalType(""); 
         document.body.style.overflow = "auto";
