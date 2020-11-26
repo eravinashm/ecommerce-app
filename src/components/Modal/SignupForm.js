@@ -33,7 +33,7 @@ const SignupForm = props => {
         validateOnBlur: false,
         validateOnChange:false,
         validate,
-        onSubmit: values => {
+        onSubmit: values => { 
             props.signup(values);
         }
     });

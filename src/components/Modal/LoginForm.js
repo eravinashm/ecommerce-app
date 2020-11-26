@@ -21,15 +21,14 @@ const validate = values => {
 const LoginForm = props => {
     const formik = useFormik({
         initialValues: {
-            email: 'test@gmail.com',
-            password: 'test@12345'
+            email: 'testacc12345@gmail.com',
+            password: 'test@123456'
         },
         validateOnBlur: false,
         validateOnChange:false,
         validate,
         onSubmit: values => {
-            console.log(" values" , values);
-            // console.log(" Firebase ", new Firebase());
+            props.login(values);
         }
     });
     return(

@@ -10,8 +10,11 @@ import config from '../../firebase/config';
 const firebaseApp = firebase.initializeApp(config);
 
 class Modal extends React.Component {
-    state = {
-        modalType: this.props.modalType        
+    constructor(props){
+        super(props);
+        this.state = {
+            modalType: this.props.modalType        
+        }    
     }
 
     componentDidMount(){
@@ -57,12 +60,31 @@ class Modal extends React.Component {
         this.setState({ modalType: type });
     }
 
-    login = values => {
+    login = (values) => {
         console.log(" values ", values);
+        firebaseApp
+        .auth()
+        .signInWithEmailAndPassword(values.email, values.password)
+        .then(function (data) {
+          // success sign in, do stuff
+          console.log(" login data ", data)
+        })
+        .catch(function (error) {
+          alert("Invalid current password.");
+        });
     }
-    signup = values => {
-        console.log(" values ", values);
-        this.props.createUserWithEmailAndPassword(values.email, values.password);
+
+    signup = (values) => {
+        firebaseApp
+        .auth()
+        .createUserWithEmailAndPassword(values.email, values.password)
+        .then(function(result) {
+            return result.user.updateProfile({
+                displayName: values.username
+            })
+        }).catch(function(error) {
+            console.log(error);
+        });          
     }
 
     render(){
@@ -83,14 +105,12 @@ class Modal extends React.Component {
     }
 }
 
+// const providers = {
+//   googleProvider: new firebase.auth.GoogleAuthProvider(),
+// };
 
-const firebaseAppAuth = firebaseApp.auth();
+// export default withFirebaseAuth({
+//     providers
+//   })(Modal);
 
-const providers = {
-  googleProvider: new firebase.auth.GoogleAuthProvider(),
-};
-
-export default withFirebaseAuth({
-    providers,
-    firebaseAppAuth,
-  })(Modal);
+export default Modal;
