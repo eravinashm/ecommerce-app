@@ -1,28 +1,25 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { validate } from '../../utils/utils';
 import Product from './product/product';
 import './products.css';
+import { withRouter } from 'react-router-dom';
 
-class Products extends React.Component{
-    // addToCart = product  => {
-    //     let { cart } = this.props;
-    //     cart.push(product);
-    //     this.props.callbackCart(cart);
-    // }
-
-    render(){
-        let { products } = this.props;
-
-        return(
-            <div className="products">
-            {products.length > 0 ?
-                <React.Fragment>
-                    {products.map(product => <Product key={product.id} product={product} callbackCart={this.props.callbackCart} /> )}
-                </React.Fragment> 
-                : <div>Loading...</div>
-            }
-            </div>
-        )
-    }
+function Products(props){
+    const callbackBuyNow = useCallback(product => {
+        props.callbackCart(product);
+        props.history.push("payment-confirm");
+    }, []);
+ 
+    return(
+        <div className="products">
+        {(validate(props.products) && props.products.length > 0) ?
+            <React.Fragment>
+                {props.products.map(product => <Product key={product.id} product={product} {...props} callbackBuyNow={callbackBuyNow} /> )}
+            </React.Fragment> 
+            : <div>Loading...</div>
+        }
+        </div>
+    )
 }
 
-export default Products;
+export default withRouter(Products);

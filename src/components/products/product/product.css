@@ -23,4 +23,8 @@
 .product img{
     height: 150px;
 }
+.view-btn a{
+    text-decoration: none;
+    color: #fff;
+}
 

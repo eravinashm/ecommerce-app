@@ -1,0 +1,10 @@
+.payment-confirm{
+    border: solid 1px lightgray;
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+.payment-confirm a{
+    padding-left: 25px;
+    text-decoration: none;
+}

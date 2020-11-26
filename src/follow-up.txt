@@ -3,3 +3,4 @@ add redux-thunk for async calls https://redux.js.org/tutorials/essentials/part-5
 https://github.com/reduxjs/reselect
 admin dashboard
 try analytics ga and google
+save user did purchase

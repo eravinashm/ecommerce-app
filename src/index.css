@@ -35,3 +35,8 @@ ul li{
 .paddingTop-30{
   padding-top: 30px;
 }
+.center-div{
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}

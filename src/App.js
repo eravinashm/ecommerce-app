@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from 'react';
+import { BrowserRouter as Router, Switch, Route, withRouter } from 'react-router-dom';
 import Products from './components/products/products';
 import Header from './components/header/header';
 import Cart from './components/Cart/Cart';
@@ -7,6 +7,7 @@ import CardDemo from './Checkout/PaymentForm2';
 import ViewProduct from './components/viewProduct/viewProduct';
 import { connect } from 'react-redux';
 import fetchService from './fetchService';
+import PaymentConfirm from './PaymentConfirm/PaymentConfirm';
 
 require('dotenv').config()
 
@@ -54,6 +55,7 @@ function App(props){
                 <Route exact path="/your-cart"><Cart cart={props.cart} /></Route>
                 <Route  path="/checkout"><CardDemo stripePublicKey={process.env.REACT_APP_STRIPE_PUBLIC_KEY} /></Route>
                 <Route  path="/view-product"><ViewProduct products={products} callbackCart={callbackCart} cart={props.cart} /></Route>
+                <Route  path="/payment-confirm"><PaymentConfirm cart={props.cart} /></Route>
                 <Route render={() => <div>Page Not Found</div>} />
             </Switch>
         </Router>
