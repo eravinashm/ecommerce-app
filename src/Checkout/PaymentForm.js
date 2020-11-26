@@ -21,7 +21,7 @@ class PaymentForm extends React.Component{
   componentDidMount() {
     if (!PaymentForm.getStripeToken) {
       // Put your publishable key here
-      const stripe = new Stripe('pk_test_05w1UMm37UTSKmtDTNZgzMTI00mSfQXY2V');
+      const stripe = new Stripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
       console.log(" stripe ", stripe);
       this.setState({ stripeLoading: false, stripeLoadingError: false, stripeToken: stripe });
     }
