@@ -46,7 +46,7 @@ class Modal extends React.Component {
         let thisRef = this;
         window.onclick = function(event) {
             if (event.target == modal) {
-                thisRef.props.callback();
+                thisRef.props.callbackClose();
             }
         }
     }
@@ -61,15 +61,17 @@ class Modal extends React.Component {
     }
 
     login = (values) => {
-        console.log(" values ", values);
+        let thisRef = this;
         firebaseApp
         .auth()
         .signInWithEmailAndPassword(values.email, values.password)
         .then(function (data) {
           // success sign in, do stuff
-          console.log(" login data ", data)
+          console.log(" login data ", data, { displayName: data.user.displayName, email: data.user.email })
+            thisRef.props.callbackUser({ displayName: data.user.displayName, email: data.user.email });
         })
         .catch(function (error) {
+            console.log(" error login ", error);
           alert("Invalid current password.");
         });
     }
@@ -93,7 +95,7 @@ class Modal extends React.Component {
             <div id="myModal" className="modal">
 
                 <div className="modal-content">
-                    <span className="close" onClick={this.props.callback}>&times;</span>
+                    <span className="close" onClick={this.props.callbackClose}>&times;</span>
                     <div className="tabs">
                         <div className={this.state.modalType === "login" ? "active": "inactive"} onClick={() => this.clickHandler("login")}>Login</div>
                         <div className={this.state.modalType === "signup" ? "active": "inactive"} onClick={() => this.clickHandler("signup")}>Signup</div>

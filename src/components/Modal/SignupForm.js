@@ -27,8 +27,8 @@ const SignupForm = props => {
     const formik = useFormik({
         initialValues: {
             username: 'raman dev',
-            email: 'testacc12345@gmail.com',
-            password: 'test@123456'
+            email: 'test16@gmail.com',
+            password: 'test16g'
         },
         validateOnBlur: false,
         validateOnChange:false,

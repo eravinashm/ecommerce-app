@@ -6,11 +6,17 @@ import { connect } from 'react-redux';
 
 function Header(props){
     let [modalType, setModalType] = useState("");
+    let [userData, setUserData] = useState(null);
 
     const close = useCallback(() => { 
         setModalType(""); 
         document.body.style.overflow = "auto";
     }, []);    
+
+    const user = useCallback((data) => {
+        console.log(" data ", data);
+        setUserData(data);
+    }, []);
 
     return(
         <React.Fragment>
@@ -19,12 +25,16 @@ function Header(props){
                 <div className="paddingTop-30">
                     <Link to="/your-cart">Cart: {props.quantity}</Link>
                 </div>
-                <div className="paddingTop-30">
+                {userData === null ? <div className="paddingTop-30">
                     <button className="header-btn" id="login-Btn" onClick={() => setModalType("login")}>Login</button>
                     <button className="header-btn" onClick={() => setModalType("signup")}>Signup</button>
+                </div>:
+                <div className="paddingTop-30">
+                    <div>Hi {userData.displayName}</div>
                 </div>
+                }
             </div>
-            {modalType != "" && <Modal modalType={modalType} callback={close} />}
+            {modalType != "" && <Modal modalType={modalType} callbackClose={close} callbackUser={user} />}
         </React.Fragment>
     )
 }

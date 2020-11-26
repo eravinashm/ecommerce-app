@@ -21,8 +21,8 @@ const validate = values => {
 const LoginForm = props => {
     const formik = useFormik({
         initialValues: {
-            email: 'testacc12345@gmail.com',
-            password: 'test@123456'
+            email: 'test16@gmail.com',
+            password: 'test16g'
         },
         validateOnBlur: false,
         validateOnChange:false,
