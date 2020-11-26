@@ -13,7 +13,8 @@ class Modal extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            modalType: this.props.modalType        
+            modalType: this.props.modalType,
+            responseMessage: ""        
         }    
     }
 
@@ -67,13 +68,15 @@ class Modal extends React.Component {
         .signInWithEmailAndPassword(values.email, values.password)
         .then(function (data) {
           // success sign in, do stuff
-          console.log(" login data ", data, { displayName: data.user.displayName, email: data.user.email })
-            thisRef.props.callbackUser({ displayName: data.user.displayName, email: data.user.email });
+            console.log(" login data ", data, { displayName: data.user.displayName, email: data.user.email })
+            thisRef.props.callbackUser({ displayName: data.user.displayName, email: data.user.email, firebaseRef: firebaseApp });
+            thisRef.setState({ responseMessage: "Login success 200 OK"}, () => thisRef.props.callbackClose())
         })
         .catch(function (error) {
             console.log(" error login ", error);
-          alert("Invalid current password.");
+            thisRef.setState({ responseMessage: "Error"})
         });
+
     }
 
     signup = (values) => {
@@ -100,7 +103,7 @@ class Modal extends React.Component {
                         <div className={this.state.modalType === "login" ? "active": "inactive"} onClick={() => this.clickHandler("login")}>Login</div>
                         <div className={this.state.modalType === "signup" ? "active": "inactive"} onClick={() => this.clickHandler("signup")}>Signup</div>
                     </div>
-                    {this.state.modalType === "login" ? <LoginForm login={this.login} />:<SignupForm signup={this.signup} />}   
+                    {this.state.modalType === "login" ? <LoginForm login={this.login} responseMessage={this.state.responseMessage} />:<SignupForm signup={this.signup} />}   
                 </div>
             </div>        
         )

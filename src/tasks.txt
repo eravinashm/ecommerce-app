@@ -1,14 +1,21 @@
-1) header cart update - done
-2) totalAmount on cart - done
-3) add stripe payment gateway client - done
-4) single product view page - done
-5) server side payment gateway read docs , try
-6) magnify image on hover - done 
-7) add redux for global state of products - done
-9) move api products call logic from products to App.js for passing to ViewCart and products - done
-11) add redux for cart - done
-12) add slick-slider for view similar products - done
-13) clicked multiple small images viewPage - done
-14)user signup login implement formik - done
-15) set cart number in header reduce - done
+header cart update - done
+totalAmount on cart - done
+add stripe payment gateway client - done
+single product view page - done
+server side payment gateway read docs , try
+magnify image on hover - done 
+add redux for global state of products - done
+move api products call logic from products to App.js for passing to ViewCart and products - done
+add redux for cart - done
+add slick-slider for view similar products - done
+clicked multiple small images viewPage - done
+user signup login implement formik - done
+set cart number in header reduce - done
 adding firebase authentication - done
+
+show username on header and hide signup login btns
+web host website on netlify
+writing unit test cases using jest for login signup
+create payment page 
+integrate with stripe checkout
+Buy Now button functionality

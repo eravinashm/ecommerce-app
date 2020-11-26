@@ -54,6 +54,7 @@ const LoginForm = props => {
             />
             {formik.errors.password && <div>{formik.errors.password}</div>}
             <button type="submit">Submit</button>
+            {props.responseMessage != "" && <div>{props.responseMessage}</div>}
         </form>
     )
 }
