@@ -13,10 +13,9 @@ user signup login implement formik - done
 set cart number in header reduce - done
 adding firebase authentication - done
 show username on header and hide signup login btns - done
-
-web host website on netlify- hosted on 26nov2020
-
+web host website on netlify- done(hosted on 26nov2020)
 writing unit test cases using jest for login signup
 integrate with stripe checkout 
-Buy Now button functionality, create payment page - created
+Buy Now button functionality, create payment page - done
+
 fix cart object issue
