@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route, withRouter } from 'react-router
 import Products from './components/products/products';
 import Header from './components/header/header';
 import Cart from './components/Cart/Cart';
-import CardDemo from './Checkout/PaymentForm2';
+import StripeCheckout from './Checkout/Checkout';
 import ViewProduct from './components/viewProduct/viewProduct';
 import { connect } from 'react-redux';
 import fetchService from './fetchService';
@@ -53,7 +53,7 @@ function App(props){
             <Switch>
                 <Route exact path="/"><Products products={products} callbackCart={callbackCart} cart={props.cart} /></Route>
                 <Route exact path="/your-cart"><Cart cart={props.cart} /></Route>
-                <Route  path="/checkout"><CardDemo stripePublicKey={process.env.REACT_APP_STRIPE_PUBLIC_KEY} /></Route>
+                <Route  path="/checkout"><StripeCheckout /></Route>
                 <Route  path="/view-product"><ViewProduct products={products} callbackCart={callbackCart} cart={props.cart} /></Route>
                 <Route  path="/payment-confirm"><PaymentConfirm cart={props.cart} /></Route>
                 <Route render={() => <div>Page Not Found</div>} />

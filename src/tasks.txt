@@ -17,6 +17,6 @@ web host website on netlify- done(hosted on 26nov2020)
 
 writing unit test cases using jest for login signup
 integrate with stripe checkout 
-Buy Now button functionality, create payment page - done
 
-fix cart object issue
+Buy Now button functionality, create payment page - done
+fix cart object issue - done

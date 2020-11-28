@@ -1,5 +1,6 @@
 .no-products-cart{
-    color: greenyellow;
+    color: coral;
+    font-size: 20px;
 }
 .cart-products li{
     display: flex;
